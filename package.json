@@ -1,0 +1,23 @@
+{
+  "name": "music-scripting-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "serve -s public -l 3000 --cors",
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "tone": "^15.0.4"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "serve": "^14.0.1",
+    "webpack": "^5.92.1",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.0.4"
+  }
+}
