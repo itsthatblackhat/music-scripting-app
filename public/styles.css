@@ -1,0 +1,158 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #EAEAEA;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+#app {
+    width: 100vw;
+    height: 100vh;
+    padding: 20px;
+    background: #F0F0F0;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Synth Background */
+.synth-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #FFB6C1;
+    background-image: linear-gradient(135deg, #FFB6C1 25%, #FF69B4 75%);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    position: relative;
+    width: 90%;
+    max-width: 1200px;
+    height: 90%;
+}
+
+/* Control Buttons */
+.button-container {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.button-container .button {
+    margin: 0 10px;
+    padding: 10px 20px;
+    background-color: #333;
+    color: #FFF;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.button-container .button:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Sliders */
+.slider-container {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    padding: 0 20px;
+}
+
+.slider {
+    width: 50px;
+    height: 200px;
+    background-color: #555;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.slider input[type="range"] {
+    -webkit-appearance: none;
+    width: 150px;
+    height: 20px;
+    background: transparent;
+    margin: 40px 0;
+    transform: rotate(270deg);
+}
+
+.slider input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    background: #333;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.slider label {
+    margin-top: 10px;
+    color: #333;
+    font-weight: bold;
+}
+
+/* Command Input */
+.command-container {
+    width: 80%;
+    background-color: #FFF;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: monospace;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+.command-container textarea {
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    resize: none;
+    padding: 10px;
+    font-size: 16px;
+}
+
+/* Keys */
+.keys {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 20px;
+}
+
+.key {
+    width: 40px;
+    height: 120px;
+    background-color: #FFF;
+    border: 1px solid #CCC;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+}
+
+.key:active {
+    background-color: #EEE;
+}

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Scripting App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="app">
+    <div class="synth-container">
+        <div class="button-container">
+            <button id="play-btn" class="button">Play</button>
+            <button id="pause-btn" class="button">Pause</button>
+            <button id="stop-btn" class="button">Stop</button>
+            <button id="save-config" class="button">Save Config</button>
+            <button id="load-config" class="button">Load Config</button>
+        </div>
+        <div class="slider-container">
+            <div class="slider">
+                <input type="range" id="speed-slider" min="0" max="100" value="50">
+                <label for="speed-slider">Speed</label>
+            </div>
+            <div class="slider">
+                <input type="range" id="volume-slider" min="0" max="100" value="50">
+                <label for="volume-slider">Volume</label>
+            </div>
+        </div>
+        <div class="keys">
+            <div class="key">C</div>
+            <div class="key">D</div>
+            <div class="key">E</div>
+            <div class="key">F</div>
+            <div class="key">G</div>
+            <div class="key">A</div>
+            <div class="key">B</div>
+        </div>
+        <div class="command-container">
+            <textarea id="script-editor" placeholder="Enter commands here..."></textarea>
+            <input type="number" id="tempo-input" value="120" placeholder="Tempo"> <!-- Added input for tempo -->
+        </div>
+        <!-- Add these missing elements -->
+        <input type="range" id="tune-knob" min="0" max="100" value="50" hidden>
+        <input type="range" id="glide-knob" min="0" max="100" value="50" hidden>
+        <input type="range" id="modulation-mix-knob" min="0" max="100" value="50" hidden>
+        <select id="osc1-waveform" hidden>
+            <option value="sine">Sine</option>
+            <option value="square">Square</option>
+            <option value="triangle">Triangle</option>
+            <option value="sawtooth">Sawtooth</option>
+        </select>
+        <select id="osc2-waveform" hidden>
+            <option value="sine">Sine</option>
+            <option value="square">Square</option>
+            <option value="triangle">Triangle</option>
+            <option value="sawtooth">Sawtooth</option>
+        </select>
+        <select id="osc3-waveform" hidden>
+            <option value="sine">Sine</option>
+            <option value="square">Square</option>
+            <option value="triangle">Triangle</option>
+            <option value="sawtooth">Sawtooth</option>
+        </select>
+        <input type="range" id="vol-knob" min="0" max="100" value="50" hidden>
+        <input type="range" id="mix-osc1-knob" min="0" max="100" value="50" hidden>
+        <input type="range" id="mix-osc2-knob" min="0" max="100" value="50" hidden>
+        <input type="range" id="mix-osc3-knob" min="0" max="100" value="50" hidden>
+        <input type="range" id="cutoff-knob" min="0" max="100" value="50" hidden>
+        <input type="range" id="attack-knob" min="0" max="100" value="50" hidden>
+        <input type="range" id="decay-knob" min="0" max="100" value="50" hidden>
+        <input type="range" id="emphasis-knob" min="0" max="100" value="50" hidden>
+        <input type="checkbox" id="filter-modulation" hidden>
+        <input type="range" id="amount-contour-knob" min="0" max="100" value="50" hidden>
+        <input type="range" id="sustain-knob" min="0" max="100" value="50" hidden>
+    </div>
+</div>
+<script src="bundle.js"></script> <!-- This will include the bundled script -->
+</body>
+</html>
