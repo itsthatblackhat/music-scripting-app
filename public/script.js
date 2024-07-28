@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const script = document.getElementById('script-editor').value;
         const tempo = parseFloat(document.getElementById('tempo-input').value);
         Tone.Transport.bpm.value = tempo;
-        playMusic(script, tempo);
+        playMusic(script);
     });
 
     document.getElementById('pause-btn').addEventListener('click', () => {
@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('speed-slider').addEventListener('input', (event) => {
         const speed = parseFloat(event.target.value) / 100;
-        Tone.Transport.bpm.value = speed * Tone.Transport.bpm.value;
+        Tone.Transport.bpm.value = Tone.Transport.bpm.value * speed;
     });
 
     document.getElementById('volume-slider').addEventListener('input', (event) => {
@@ -32,9 +32,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     document.querySelectorAll('.key').forEach(key => {
-        key.addEventListener('click', () => {
+        key.addEventListener('mousedown', (event) => {
             const note = key.textContent + '4'; // Assuming the 4th octave for simplicity
             playNoteOnClick(note);
+            const startTime = Tone.now();
+            key.addEventListener('mouseup', () => {
+                const duration = Tone.now() - startTime;
+                recordNotePress(note, duration);
+            }, { once: true });
         });
     });
 
@@ -42,18 +47,21 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('load-config').addEventListener('click', loadConfig);
 });
 
-function playMusic(script, tempo) {
+function playMusic(script) {
     console.log('Playing music with script:', script);
-    console.log('Tempo:', tempo);
     const commands = parseScript(script);
     console.log('Parsed commands:', commands);
-    Tone.Transport.bpm.value = tempo;
     interpretCommands(commands);
 }
 
 function playNoteOnClick(note) {
     const synth = new Tone.Synth().toDestination();
     synth.triggerAttackRelease(note, '8n');
+}
+
+function recordNotePress(note, duration) {
+    const commandBoard = document.getElementById('script-editor');
+    commandBoard.value += `note ${note} ${duration.toFixed(2)}\n`;
 }
 
 function saveConfig() {

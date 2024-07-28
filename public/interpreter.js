@@ -32,17 +32,17 @@ export function interpretCommands(commands) {
         volume: volume
     }).toDestination();
 
-    let time = Tone.now();
+    Tone.Transport.schedule((time) => {
+        let noteTime = time;
+        commands.forEach(command => {
+            if (command[0] === 'note') {
+                const note = command[1];
+                const duration = command[2];
+                synth.triggerAttackRelease(note, duration, noteTime);
+                noteTime += Tone.Time(duration).toSeconds();
+            }
+        });
+    }, Tone.now());
 
-    commands.forEach(command => {
-        if (command[0] === 'tempo') {
-            const tempo = parseInt(command[1]);
-            Tone.Transport.bpm.value = tempo;
-        } else if (command[0] === 'note') {
-            const note = command[1];
-            const duration = command[2];
-            synth.triggerAttackRelease(note, duration, time);
-            time += Tone.Time(duration).toSeconds();
-        }
-    });
+    Tone.Transport.start();
 }
