@@ -7,8 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
         await Tone.start();
         console.log("Audio is ready");
         const script = document.getElementById('script-editor').value;
-        const tempoInput = document.getElementById('tempo-input');
-        const tempo = tempoInput ? parseFloat(tempoInput.value) : 120; // Default to 120 if not found
+        const tempo = parseFloat(document.getElementById('tempo-input').value);
+        Tone.Transport.bpm.value = tempo;
         playMusic(script, tempo);
     });
 
@@ -19,6 +19,23 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('stop-btn').addEventListener('click', () => {
         Tone.Transport.stop();
         Tone.Transport.cancel();
+    });
+
+    document.getElementById('speed-slider').addEventListener('input', (event) => {
+        const speed = parseFloat(event.target.value) / 100;
+        Tone.Transport.bpm.value = speed * Tone.Transport.bpm.value;
+    });
+
+    document.getElementById('volume-slider').addEventListener('input', (event) => {
+        const volume = parseFloat(event.target.value) / 100;
+        Tone.Destination.volume.value = volume * 100 - 50; // converting 0-100 to -50 to +50 dB
+    });
+
+    document.querySelectorAll('.key').forEach(key => {
+        key.addEventListener('click', () => {
+            const note = key.textContent + '4'; // Assuming the 4th octave for simplicity
+            playNoteOnClick(note);
+        });
     });
 
     document.getElementById('save-config').addEventListener('click', saveConfig);
@@ -32,6 +49,11 @@ function playMusic(script, tempo) {
     console.log('Parsed commands:', commands);
     Tone.Transport.bpm.value = tempo;
     interpretCommands(commands);
+}
+
+function playNoteOnClick(note) {
+    const synth = new Tone.Synth().toDestination();
+    synth.triggerAttackRelease(note, '8n');
 }
 
 function saveConfig() {
